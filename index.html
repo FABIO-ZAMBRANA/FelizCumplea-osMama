@@ -1,73 +1,91 @@
-<html lang="zh-CN">
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Cumpleaños</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday</title>
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
 
-    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
-    <link rel="stylesheet" href="css/index.css">
-</head>
-
-<body>
-    <!-- 封面 -->
-    <div class="container">
-        <div class="row">
-            <div class="birth-cover-container">
-                <button id="birth-start-btn" disabled>加载中...</button>
-            </div>
+  <body>
+    <!-- Portada -->
+    <div class="container text-center">
+      <div class="birth-cover-container">
+        <!-- Imagen redonda centrada -->
+        <div class="mb-4">
+          <img src="img/mama.jpg" alt="mama" class="img-mama1 img-round" />
         </div>
+
+        <!-- Botón contador -->
+        <div class="mb-3">
+          <button id="birth-start-btn" disabled>Cargando...</button>
+        </div>
+
+        <!-- Mensaje separado -->
+        <div id="birthday-message" class="highlight-message"></div>
+      </div>
     </div>
 
-    <!-- 歌曲 -->
-    <audio class="song" controls loop style="display: none; opacity: 0">
-        <source src="music/index.mp3" />
+    <!-- Canción (reproducción automática y en loop) -->
+    <audio class="song" id="background-music" autoplay loop style="display: none; opacity: 0">
+      <source src="music/index.mp3" />
     </audio>
 
-    <!-- 彩带 -->
+    <!-- Confeti -->
     <canvas id="brith-confetti"></canvas>
 
-    <!-- 主内容 -->
+    <!-- Contenido principal -->
     <div class="main">
-        <div class="container pt-5">
-            <div class="row">
-                <!-- 横幅图 -->
-                <div class="col-12 col-xl-6 mx-auto">
-                    <img src="img/banner.png" alt="banner.png">
-                </div>
+      <div class="container pt-5">
+        <div class="row">
+          <!-- Imagen de banner -->
+          <div class="col-12 col-xl-6 mx-auto">
+            <img src="img/banner.png" alt="banner.png" />
+          </div>
 
-                <!-- 寿星 -->
-                <div class="col-12  text-center">
-                    <div id="name" class="birth-people-name">Lily</div>
-                </div>
+          <!-- Cumpleañero -->
+          <div class="col-12 text-center">
+            <div id="name" class="birth-people-name">LIDIA</div>
+          </div>
 
-                <!-- 祝词 -->
-                <div class="col-12 text-center">
-                    <div class="birth-greeting-word">
-                        <div id="greeting-word" class="typing">
-                            <h2><span>生日快乐呀，</span><i id="inline-name" class="birth-inline-people-name">莉莉</i><span id="people-type">小姐姐</span></h2>
-                            <h2>且喜且乐，且以永日</h2>
-                            <h2>一寸一礼，一寸欢喜</h2>
-                            <h2>遥叩芳辰，生辰吉乐</h2>
-                        </div>
-                        <span id="typed" style="white-space: pre;"></span>
-                    </div>
-                </div>
-
-                <!-- 蛋糕图 -->
-                <div class="col-12 col-xl-3 birth-cake">
-                    <img src="img/cake.gif" alt="cake.gif">
-                </div>
-
-                <!-- 版权 -->
-                <div class="col-12 text-center">
-                    <span class="birth-greeting-word" id="author">&copy;2024 Spring-_-Bear</span>
-                </div>
+          <!-- Mensaje de felicitación -->
+          <div class="col-12 text-center">
+            <div class="birth-greeting-word">
+              <div id="greeting-word" class="typing">
+                <h2>
+                  <span>Feliz cumpleaños, </span
+                  ><i id="inline-name" class="birth-inline-people-name">Mami ❤ </i
+                  ><span id="people-type"></span>
+                </h2>
+                <h2>Que Dios te bendiga hoy y siempre.</h2>
+                <h2>Con cada regalo, viene una sonrisa</h2>
+                <h2>Con cariño en tu día especial,</h2>
+                <h2>Tu hijo Fabio 🫶🏼</h2>
+              </div>
+              <span id="typed" style="white-space: pre"></span>
             </div>
-        </div>
+          </div>
 
-        <!-- 气球图 -->
-        <img src="img/balloon.png" alt="balloon" class="brith-balloon">
+          <!-- Imagen del pastel -->
+          <div class="col-12 col-xl-3 birth-cake">
+            <img src="img/cake.gif" alt="cake.gif" class="img-cake img-round" />
+          </div>
+
+          <div class="col-12 text-center col-xl-3 birth-mama">
+            <img src="img/mama.jpg" alt="mama" class="img-mama img-round" />
+          </div>
+          <br>
+
+          <!-- Derechos de autor -->
+          <div class="col-12 text-center">
+            <span class="birth-greeting-word" id="author">&copy;2025 - Fabio Zambrana</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagen de globos -->
+      <img src="img/balloon.png" alt="balloon" class="brith-balloon" />
     </div>
 
     <script src="js/lib/snowflakes.min.js"></script>
@@ -76,6 +94,22 @@
     <script src="js/lib/dayjs.min.js"></script>
     <script src="js/confetti.js"></script>
     <script src="js/index.js"></script>
-</body>
 
+    <script>
+      // Función para cambiar la música a "las mañanitas.mp3" cuando se muestre el contenido principal
+      function changeMusicToLasMañanitas() {
+        var musicPlayer = document.getElementById('background-music');
+        musicPlayer.src = "music/las mañanitas.mp3"; // Cambiar la fuente de la música
+        musicPlayer.play(); // Iniciar la música
+      }
+
+      // Llamar a la función para cambiar la música cuando el contenido principal se muestre
+      $(document).ready(function () {
+        $('#birth-start-btn').click(function () {
+          // Cambiar la música cuando se hace clic en el botón
+          changeMusicToLasMañanitas();
+        });
+      });
+    </script>
+  </body>
 </html>

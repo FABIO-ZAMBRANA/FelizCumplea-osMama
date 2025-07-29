@@ -16,15 +16,49 @@ img {
     background: url(../img/background.png) center no-repeat #000;
 }
 
+.img-mama1 {
+    width: 100%;
+    max-width: 400px;  /* Aumentar el tamaño máximo */
+    height: auto;      /* Mantener proporción */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ffd700;
+    border: 4px solid gold;
+    display: block;     /* Para centrar la imagen */
+    margin: 0 auto;     /* Centra la imagen en su contenedor */
+    position: absolute; /* Esto ayudará a ponerla sobre el botón */
+    top: 0;             /* Coloca la imagen arriba */
+    left: 50%;
+    transform: translateX(-50%); /* Centra la imagen */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 15px #ffd700;
+    }
+    50% {
+        box-shadow: 0 0 30px #ffcc00;
+    }
+    100% {
+        box-shadow: 0 0 15px #ffd700;
+    }
+}
+
 #birth-start-btn {
-    width: 50%;
-    height: 50px;
+    background: linear-gradient(to right, #b16d0e, #ffe14d);
+    color: #4b2600;
+    font-weight: bold;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    font-size: 20px;
+    width: 50%;  /* El ancho sigue al 50% */
+    height: 80px;
     position: fixed;
     left: 50%;
-    top: 45%;
+    top: 70%;  /* Coloca el botón debajo de la imagen */
     transform: translate(-50%, -50%);
     z-index: 9999999999999999999999;
-    font-size: 18px;
     outline: none;
     box-sizing: border-box;
     border-radius: .3em;
@@ -39,6 +73,13 @@ img {
     transition: all .2s ease-in-out;
     background-size: 100% 100%;
     background: #fff linear-gradient(160deg, #a54e07, #b47e11, #fef1a2, #bc881b, #a54e07) no-repeat center;
+    text-align: center; /* Centra el texto */
+}
+.highlight {
+    color: #000000; /* Color amarillo */
+    font-weight: bold; /* Resaltar el texto con negrita */
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700; /* Efecto de resplandor */
+    animation: heartbeat 1.5s ease-in-out infinite, blink 1s step-start infinite; /* Animaciones */
 }
 
 #birth-start-btn:active {
@@ -48,6 +89,22 @@ img {
         inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
     border: 1px solid rgba(165, 93, 7, .6);
     color: rgba(120, 50, 5, .8);
+}
+
+/* Hacer que el texto sea más pequeño en pantallas más pequeñas */
+@media (max-width: 768px) {
+    #birth-start-btn {
+        font-size: 16px; /* Reducir el tamaño de la fuente */
+        width: 80%; /* Aumentar el tamaño del botón en pantallas pequeñas */
+    }
+
+    .highlight {
+        font-size: 18px; /* Reducir tamaño de fuente en pantallas pequeñas */
+    }
+
+    .img-mama1 {
+        max-width: 300px; /* Limitar el tamaño de la imagen de mamá en dispositivos pequeños */
+    }
 }
 
 #brith-confetti {
@@ -88,6 +145,87 @@ img {
     top: 100%;
     opacity: 0.5;
     z-index: 99999999;
+}
+
+/* Estilo para hacer todas las imágenes redondas */
+.img-round {
+    width: 100%; /* Asegura que la imagen no se desborde */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    object-fit: cover; /* Asegura que la imagen cubra el área de forma uniforme */
+}
+
+/* Por defecto (pantallas pequeñas, como móviles) */
+.img-cake {
+  display: none;
+}
+.img-mama {
+  display: block;
+}
+
+/* En pantallas grandes (>= 992px, como laptops o PCs) */
+@media screen and (min-width: 992px) {
+  .img-cake {
+    display: block;  /* Mostrar pastel */
+  }
+  .img-mama {
+    display: none;   /* Ocultar imagen de mamá */
+  }
+}
+
+/* Mostrar ambas imágenes en pantallas pequeñas (celular) */
+@media (max-width: 768px) {
+    .img-mama {
+        display: block; /* Mostrar imagen de mamá en pantallas pequeñas */
+    }
+    .img-cake {
+        display: block; /* Mostrar imagen del pastel en pantallas pequeñas */
+    }
+
+    .birth-people-name {
+        font-size: 40px; /* Reducir tamaño del texto en dispositivos pequeños */
+    }
+
+    .highlight-message {
+        font-size: 20px; /* Ajustar tamaño del mensaje */
+    }
+
+    #birth-start-btn {
+        width: 80%; /* Hacer el botón más grande en dispositivos pequeños */
+        font-size: 16px;
+    }
+
+    .birth-cake {
+        max-width: 150px; /* Limitar el tamaño del pastel en pantallas pequeñas */
+    }
+
+    .img-mama1 {
+        max-width: 300px; /* Limitar el tamaño de la imagen de mamá en dispositivos pequeños */
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2); /* Aumentar el tamaño para simular el latido */
+    }
+    100% {
+        transform: scale(1); /* Vuelve al tamaño normal */
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes brith-sway-animation {

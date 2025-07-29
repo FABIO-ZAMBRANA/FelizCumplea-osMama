@@ -1,7 +1,7 @@
 // 全局变量
 const birthdayMap = {
-    2024: "2024-05-12",
-    2025: "2025-04-20",
+    2024: "2024-07-28",
+    2025: "2025-07-28",  // Actualizado a 29 de julio de 2025
     2026: "2026-05-09",
     2027: "2027-04-29",
     2028: "2028-04-17",
@@ -13,69 +13,75 @@ const $main = $(".main")
 let intervalId = null
 let snowflakes = null
 
-// 页面加载完成
+// Página cargada
 $(document).ready(function () {
-    // 雪花飞舞
+    // Efecto de nieve
     snowflakes = new Snowflakes({
         color: "#ffd700",
         minSize: 20,
     })
-    // 淡出内容
+    // Desvanecer contenido
     $main.fadeOut(1)
-    // 生日倒计时
+    // Contador regresivo del cumpleaños
     intervalId = setInterval(birthdayCountdown, 1000)
-    // 按钮点击
+    // Click en el botón
     $btn.click(pageRender)
 })
 
 function birthdayCountdown() {
-    // 获取当前时间和今年生日
+    // Obtener la fecha actual y la fecha de cumpleaños de este año
     const now = dayjs()
     const curYearStr = now.format("YYYY")
     let birthday = dayjs(birthdayMap[curYearStr])
 
-    // 生日当天关闭倒计时，解锁按钮支持可点击
+    // Si es el día del cumpleaños, detener el contador y habilitar el botón
     if (now.format("YYYY-MM-DD") === birthday.format("YYYY-MM-DD")) {
         clearInterval(intervalId)
-        $btn.text("来吧，展示")
+        $btn.text("¡Vamos, mostrar!")
         $btn.prop("disabled", false)
         return
     }
 
-    // 今年生日已过则计算距明年生日的时间: before - birthday < now - after
+    // Si el cumpleaños de este año ya pasó, calcular el tiempo hasta el próximo cumpleaños
     if (now.isAfter(birthday)) {
         birthday = dayjs(birthdayMap[parseInt(curYearStr) + 1])
     }
 
-    // 计算与目标日期的差值（秒），并转换成天、时、分、秒
+    // Calcular la diferencia con la fecha objetivo (en segundos) y convertirla a días, horas, minutos y segundos
     const diffInSeconds = birthday.diff(now, "second")
     const days = Math.floor(diffInSeconds / (3600 * 24))
     const hours = Math.floor((diffInSeconds % (3600 * 24)) / 3600)
     const minutes = Math.floor((diffInSeconds % 3600) / 60)
     const seconds = diffInSeconds % 60
 
-    // 构建时间字符串
-    const timeStrArr = []
-    if (days > 0) {
-        timeStrArr.push(`${days}天`)
-    }
-    if (hours > 0 || days > 0) {
-        timeStrArr.push(`${hours}时`)
-    }
-    if (minutes > 0 || hours > 0 || days > 0) {
-        timeStrArr.push(`${minutes}分`)
-    }
-    timeStrArr.push(`${seconds}秒`)
+// Construir la cadena de tiempo
+// Construir la cadena de tiempo
+const timeStrArr = []
+if (days > 0) {
+    timeStrArr.push(`${days} días`)
+}
+if (hours > 0 || days > 0) {
+    timeStrArr.push(`${hours} horas`)
+}
+if (minutes > 0 || hours > 0 || days > 0) {
+    timeStrArr.push(`${minutes} minutos`)
+}
+timeStrArr.push(`${seconds} segundos`)  // Añadir los segundos
 
-    $btn.text(diffInSeconds <= 0 ? "指定日期生日已过" : timeStrArr.join(""))
+
+// Añadir el mensaje después de los segundos
+timeStrArr.push(`<span class="highlight"> para cumpleaños Lidia!</span>`)
+
+$btn.html(diffInSeconds <= 0 ? "El cumpleaños ya pasó" : timeStrArr.join(" "))
+
 }
 
 function pageRender() {
-    // 关闭雪花、淡出封面
+    // Detener nieve, desvanecer portada
     snowflakes.destroy()
     $(".birth-cover-container").fadeOut(1500)
 
-    // 淡入内容、播放歌曲、放飞气球、展示祝词
+    // Desvanecer contenido, reproducir música, soltar globos, mostrar mensaje de cumpleaños
     $main.fadeIn("slow")
     $(".song")[0].play()
     $(".brith-balloon").animate({ top: -500 }, 8000)
@@ -86,4 +92,3 @@ function pageRender() {
         loop: true,
     })
 }
-
